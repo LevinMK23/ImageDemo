@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 
 import com.samsung.imagedemo.core.GameThread;
 
+import java.util.concurrent.TimeUnit;
+
 public class GameView extends SurfaceView implements SurfaceHolder.Callback, View.OnTouchListener {
 
     private final GameThread thread;
@@ -38,7 +40,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Vie
         // kill thread
         try {
             thread.stopThread();
-            thread.join();
+            while (thread.isAlive()) {
+                TimeUnit.MILLISECONDS.sleep(100);
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

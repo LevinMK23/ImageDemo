@@ -28,6 +28,7 @@ public class GameThread extends Thread {
         paint = new Paint();
         paint.setColor(Color.RED);
         paint.setStyle(Paint.Style.FILL);
+        setDaemon(true);
     }
 
     private void update(Canvas canvas) {
