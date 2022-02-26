@@ -50,7 +50,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Vie
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
-        thread.setCoordinates(motionEvent.getX(), motionEvent.getY());
+        thread.shot(motionEvent.getX(), motionEvent.getY());
         return false;
     }
 }

@@ -8,6 +8,14 @@ public class Ball {
     private float dx;
     private float dy;
 
+    public Ball(float x, float y, float r, float dx, float dy) {
+        this.x = x;
+        this.y = y;
+        this.r = r;
+        this.dx = dx;
+        this.dy = dy;
+    }
+
     public Ball(float x, float y) {
         this.x = x;
         this.y = y;
@@ -29,6 +37,21 @@ public class Ball {
         }
     }
 
+    public boolean isCollated(Ball ball) {
+        float distance = (float) Math.sqrt(
+                (x - ball.x) * (x - ball.x) +
+                        (y - ball.y) * (y - ball.y)
+        );
+        return distance <= 2 * r + 1;
+    }
+
+    public boolean isInScreen(int width, int height) {
+        if (x + r >= width || x - r <= 0) {
+            return false;
+        }
+        return !(y + r >= height) && !(y - r <= 0);
+    }
+
     public float getR() {
         return r;
     }
@@ -42,16 +65,7 @@ public class Ball {
     }
 
     public void update(int width, int height) {
-
         x += dx;
         y += dy;
-
-        if (x + r >= width || x - r <= 0) {
-            dx *= -1;
-        }
-        if (y + r >= height || y - r <= 0) {
-            dy *= -1;
-        }
-
     }
 }
